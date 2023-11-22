@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<title>Set Location Cookie Example</title>
+<script>
+function setCookie(cookieName, cookieValue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+}
+
+function setLocationCookie(location) {
+    setCookie("location", location, 7);
+}
+</script>
 </head>
 <body>
-    <h1>helloooo</h1>
-    
+
+<button onclick="setLocationCookie('SanFrancisco')">Set Location to San Francisco</button>
+<button onclick="setLocationCookie('Bangalore')">Set Location to Bangalore</button>
+<button onclick="setLocationCookie('Sydney')">Set Location to Sydney</button>
+
 </body>
 </html>
