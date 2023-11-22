@@ -13,6 +13,35 @@ function setCookie(cookieName, cookieValue, exdays) {
 function setLocationCookie(location) {
     setCookie("location", location, 7);
 }
+function redirectToRegionalServer() {
+        const region = getCookie('location');
+        let url;
+
+        switch(region) {
+            case 'Bangalore':
+                url = 'http://bangalore.example.com';
+                break;
+            case 'SanFrancisco':
+                url = 'http://sanfrancisco.example.com';
+                break;
+            case 'Sydney':
+                url = 'http://170.64.182.121/';
+                break;
+            default:
+                alert('Region cookie not set or unknown region');
+                return;
+        }
+
+        window.location.href = url; // Redirect to the regional server
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+
 </script>
 </head>
 <body>
@@ -20,6 +49,8 @@ function setLocationCookie(location) {
 <button onclick="setLocationCookie('SanFrancisco')">Set Location to San Francisco</button>
 <button onclick="setLocationCookie('Bangalore')">Set Location to Bangalore</button>
 <button onclick="setLocationCookie('Sydney')">Set Location to Sydney</button>
+<button id="redirectButton" onclick="redirectToRegionalServer()">Go to Regional Server</button>
+
 
 </body>
 </html>
